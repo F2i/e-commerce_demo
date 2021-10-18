@@ -41,11 +41,11 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=255)
-    birthday = models.DateField(null=True)
+    birth_date = models.DateField(null=True)
     membership = models.CharField(max_length=1, choices=MEMBER_SHIP, default=MEMBER_SHIP_B)
 
     class Meta:
-        db_table = 'store_customer'
+        # db_table = 'store_customer'
         indexes = [
             models.Index(fields=['last_name', 'first_name'])
         ]
