@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import fields
 from django.db.models.aggregates import Min
 from django.db.models.base import Model
 from django.db.models.deletion import CASCADE, PROTECT, SET_NULL
@@ -16,10 +17,11 @@ class Collection(models.Model):
 
 
 class Product(models.Model):
-    # sku = models.CharField(max_length=10, primary_key=True)
+    # sku = models.CharField(max_length=10, primary_key=True) # for 'id' field replacement
     title = models.CharField(max_length=255) #varchar(255)
+    slug = models.SlugField()
     description = models.TextField()
-    price = models.DecimalField(max_digits=5, decimal_places=1)
+    unit_price = models.DecimalField(max_digits=5, decimal_places=1)
     inventory = models.IntegerField()
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=PROTECT)
@@ -41,6 +43,12 @@ class Customer(models.Model):
     phone = models.CharField(max_length=255)
     birthday = models.DateField(null=True)
     membership = models.CharField(max_length=1, choices=MEMBER_SHIP, default=MEMBER_SHIP_B)
+
+    class Meta:
+        db_table = 'store_customer'
+        indexes = [
+            models.Index(fields=['last_name', 'first_name'])
+        ]
 
 
 class Order(models.Model):
@@ -68,6 +76,7 @@ class Adress(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE, primary_key=True)
+    zip = models.SmallIntegerField()
 
 
 class Cart(models.Model):
