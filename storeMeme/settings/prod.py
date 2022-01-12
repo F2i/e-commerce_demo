@@ -1,0 +1,16 @@
+from .common import *
+import os
+
+DEBUG = False
+SECRET_KEY = os.environ['SECRET_KEY']
+ALLOWED_HOSTS = []
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'store_meme',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'root'
+    }
+}

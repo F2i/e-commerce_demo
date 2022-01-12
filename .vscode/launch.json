@@ -13,7 +13,9 @@
                 "runserver",
                 "6969"
             ],
-            "django": true
+            "django": true,
+            "python.terminal.activateEnvironment": true,
+            "python.terminal.activateEnvInCurrentTerminal": true,
         }
     ]
 }

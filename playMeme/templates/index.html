@@ -5,5 +5,10 @@
     {% else %}
     <h1> Dit con me may {{ cac }} </h1>
     {% endif %}
+    <ul>
+        {% for product in products %}
+        <li>{{ product.product_title }}</li>  
+        {% endfor %}
+    </ul>
 </body>
 </html>
